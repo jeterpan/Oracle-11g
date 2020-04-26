@@ -15,10 +15,10 @@ SELECT * FROM (
   SELECT row_number() OVER (ORDER BY campo_indexado) linha, p.* FROM tabela_enorme p
 ) WHERE linha BETWEEN 91000 AND 91200;
 
--- Reescrita para audit_vdp
+-- Reescrita para ERP Totvs logix.audit_vdp
 
 SELECT * FROM (
-  SELECT row_number() OVER (ORDER BY cod_empresa, num_pedido) linha, a.* FROM audit_vdp a
+  SELECT row_number() OVER (ORDER BY cod_empresa, num_pedido) linha, a.* FROM logix.audit_vdp a
 ) WHERE linha BETWEEN 91000 AND 91200
 ;
 
@@ -26,7 +26,7 @@ SELECT * FROM (
 -- Este pode comando pode ser utilizad ate o Oracle 11g, visto que no 12g ha recursos para melhorar ainda mais esta escrita
 
 WITH determina_linha AS
-  ( SELECT row_number() OVER (ORDER BY cod_empresa, num_pedido) linha, a.* FROM audit_vdp a )
+  ( SELECT row_number() OVER (ORDER BY cod_empresa, num_pedido) linha, a.* FROM logix.audit_vdp a )
 
 SELECT *
   FROM determina_linha
